@@ -1,0 +1,6 @@
+{
+  "ENV":{
+    "debug":true,
+    "api":"localhost:3003/data"
+  }
+}

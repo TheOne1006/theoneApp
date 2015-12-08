@@ -1,5 +1,5 @@
+'use sucrit';
 angular.module('starter.services', [])
-
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 
@@ -7,7 +7,7 @@ angular.module('starter.services', [])
   var chats = [{
     id: 0,
     name: 'xiaoming',
-    lastText: 'wang14',
+    lastText: 'wang11',
     face: 'img/ben.png'
   }, {
     id: 1,

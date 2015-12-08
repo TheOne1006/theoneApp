@@ -15,7 +15,7 @@ $ cd myApp
 |- platforms          (ionic初始化)
 |- plugins            (ionic初始化)
 |- resources          (ionic初始化 系统资源图片)
-|- scss 
+|- scss               (移除)
 |- www                (ionic 初始化,主要编写目录)
 
 |- app/               (用于gulp 工作生成, www 作为dest目录)
@@ -38,3 +38,26 @@ $ cd myApp
 6. gulp-clean 清理
 7. run-sequence 并行和串行执行
 8. browser-sync 浏览器
+9. gulp-ng-constant json 生成ng 代码,constant 信息 
+
+
+### 4. 对app目录的规划
+
+
+|-app
+|-app/css
+|
+|-app/scss
+|
+|-app/img
+|
+|-app/js/
+|-app/js/app.js
+
+|-app/js/config.js
+|-app/js/filters/
+|-app/js/services/
+|-app/js/directives/
+|-app/js/controllers/
+
+|-app/templates

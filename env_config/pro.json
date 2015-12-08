@@ -1,0 +1,6 @@
+{
+  "ENV":{
+    "debug":false,
+    "api":"http://www.theone.io"
+  }
+}

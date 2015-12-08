@@ -3,87 +3,30 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var bower = require('bower');
-var concat = require('gulp-concat');
-var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
+// var concat = require('gulp-concat');
+// var minifyCss = require('gulp-minify-css');
 var sh = require('shelljs');
 var config = require('../common/constants')();
 
-var rename = require('gulp-rename');
+// var rename = require('gulp-rename');
 var wiredep = require('gulp-wiredep');
 var rev = require('gulp-rev');
 var usemin = require('gulp-usemin');
-var clean = require('gulp-clean');
+// var clean = require('gulp-clean');
 var runSequence = require('run-sequence');
 
+// var ngConstant = require('gulp-ng-constant');
 
-
+// 传参,暂时不需要
+// var minimist = require('minimist');
 
 /**
  * use in browser
  */
-var browserSync = require('browser-sync'),
-    reload      = browserSync.reload;
-
-// 传参
-var minimist = require('minimist');
-
-var envOptions = {
-  string: 'env',
-  default: { env: process.env.NODE_ENV || 'dev' }
-};
-
-var options = minimist(process.argv.slice(2), envOptions);
-
-
-gulp.task('sass', function(done) {
-  gulp.src(config.devDir+'css/ionic.app.scss')
-    .pipe(sass())
-    .on('error', sass.logError)
-    .pipe(gulp.dest(config.dest+'css/'))
-    // .pipe(minifyCss({
-    //   keepSpecialComments: 0
-    // }))
-    .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest(config.dest+'css/'))
-    .pipe(gulp.dest(config.devDir+'css/'))
-    .on('end', done);
-});
+var browserSync = require('browser-sync');
 
 gulp.task('watch', function() {
-
-  // sass 变化
-  gulp.watch(config.devDir+'css/*.scss', ['sass']);
-
-
-  if(options.env === 'dev') {
-
-    gulp.watch([
-      config.devDir+'*.html',
-      config.devDir+'js/*.js',
-      config.devDir+'templates/*.html',
-      config.devDir+'css/*.css'
-      ])
-      .on('change', reload);
-  }else{
-    // 生产环境下 同步到 dest
-    // index.html change
-    gulp.watch([config.devDir+'*.html']).on('change',function  () {
-      return runSequence('usemin', 'browser-reload');
-    });
-    // img
-    gulp.watch([config.devDir+'img/*.*']).on('change',function  () {
-       return runSequence('copy-image', 'browser-reload');
-    });
-    // js
-    gulp.watch([config.devDir+'js/*.js']).on('change',function  () {
-       return runSequence('copy-js', 'browser-reload');
-    });
-    gulp.watch([config.devDir+'templates/*.html']).on('change',function  () {
-       return runSequence('copy-templates', 'browser-reload');
-    });
-  }
-
+  runSequence (['watch-dev','watch-scss']);
 });
 
 gulp.task('install', ['git-check'], function() {
@@ -106,27 +49,14 @@ gulp.task('git-check', function(done) {
   done();
 });
 
-
-// 清空 dest
-gulp.task('cleanDest', function () {
-  return gulp.src(config.dest, {read: false})
-    .pipe(clean());
-});
-
 /**
  * use in browser
  */
 gulp.task('browser-sync', function() {
 
-    // 默认 dest
-    var serverPath = config.dest;
-    if(options.env === 'dev') {
-      serverPath = config.devDir;
-    }
-
     browserSync.init({
         // 服务开启地址
-        server: serverPath,
+        server: config.devDir,
         index: "index.html",
         directory: false,
         // Linux
@@ -136,11 +66,6 @@ gulp.task('browser-sync', function() {
         browser: ["Google Chrome"]
     });
 
-});
-
-// reload
-gulp.task('browser-reload', function(){
-  reload();
 });
 
 // wiredep html
@@ -153,40 +78,12 @@ gulp.task('bower', function () {
     .pipe(gulp.dest(config.devDir));
 });
 
-// 复制文件 - 图片
-gulp.task('copy-image', function () {
-   return gulp.src(config.devDir+'img/*')
-        .pipe(rename({dirname: ''}))
-        .pipe(gulp.dest(config.dest+'img/'));
-});
-gulp.task('copy-templates', function () {
-   return gulp.src(config.devDir+'templates/*')
-        .pipe(rename({dirname: ''}))
-        .pipe(gulp.dest(config.dest+'templates/'));
-});
-gulp.task('copy-js', function () {
-   return gulp.src(config.devDir+'js/*')
-        .pipe(rename({dirname: ''}))
-        .pipe(gulp.dest(config.dest+'js/'));
-});
-
-gulp.task('copy-font',function () {
-  return gulp.src(config.devDir+'lib/ionic/fonts/*')
-       .pipe(rename({dirname: ''}))
-       .pipe(gulp.dest(config.dest+'lib/ionic/fonts/'));
-});
-
-// 复制文件
-gulp.task('copy2Dest', function(){
-  return runSequence(['copy-image', 'copy-templates', 'copy-js', 'copy-font']);
-});
-
-
-// 合并js
+// 合并js , for build
 gulp.task('usemin', function() {
   return gulp.src(config.devDir+'index.html')
     .pipe(usemin({
-      js: [ rev ]
+      css: [ rev() ],
+      js: [ rev() ]
     }))
     .pipe(gulp.dest(config.dest));
 });
@@ -194,16 +91,12 @@ gulp.task('usemin', function() {
 
 gulp.task('serve', function(){
 
-  if(options.env === 'dev'){
-    return runSequence('sass', 'bower', 'watch','browser-sync');
-  }else{
-    return runSequence('cleanDest', 'copy2Dest','sass', 'bower', 'usemin', 'watch','browser-sync');
-  }
+    return runSequence('cleanSassTarget','sass', 'bower','config-dev', 'watch','browser-sync');
 });
 
 
 gulp.task('build', function(){
-    options.env = 'pro';
-    return runSequence('cleanDest', 'copy2Dest','sass', 'bower', 'usemin');
+
+    return runSequence(['cleanDest','cleanSassTarget'], 'copy2Dest','sass', 'bower','config-pro', 'usemin');
 
 });
