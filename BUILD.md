@@ -53,8 +53,8 @@ $ cd myApp
 |
 |-app/js/
 |-app/js/app.js
-
-|-app/js/config.js
+|-app/js/route.js  配置路由
+|-app/js/config.js 配置信息
 |-app/js/filters/
 |-app/js/services/
 |-app/js/directives/

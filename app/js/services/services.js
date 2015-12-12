@@ -1,5 +1,5 @@
 'use sucrit';
-angular.module('starter.services', [])
+angular.module('theOneIo.services', [])
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 
