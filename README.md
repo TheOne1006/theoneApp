@@ -44,5 +44,6 @@ $ ionic emulate ios
 
 1. 随机loading 效果
 2. 白天/夜间模式
+3. 收藏/搜索
 
 

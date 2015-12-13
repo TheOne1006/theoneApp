@@ -8,7 +8,8 @@ angular.module('theOneIo.route', ['ionic'])
     .state('main', {
     url: '',
     abstract: true,
-    templateUrl: 'templates/main.html'
+    templateUrl: 'templates/main.html',
+    controller: 'MainCtrl'
   })
 
   // Each tab has its own nav history stack:
@@ -22,7 +23,7 @@ angular.module('theOneIo.route', ['ionic'])
     }
   })
   .state('main.articles', {
-    url: '/articles/:tab',
+    url: '/articles/:cate',
     views: {
       'mainContent': {
         templateUrl: 'templates/articles.html',

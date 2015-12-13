@@ -21,12 +21,27 @@ angular
       }
     );
 
+    /**
+     * 类型
+     */
+    var cateResource = $resource(env.api+'/home/cate/index',{},{
+        timeout: 20000
+      }
+    );
+
+
+
     function getHomeList () {
       return resource.query().$promise;
     }
 
+    function getCateAll () {
+      return cateResource.query().$promise;
+    }
+
     return {
-      getHomeList: getHomeList
+      getHomeList: getHomeList,
+      getCateAll: getCateAll
     };
   }]);
 

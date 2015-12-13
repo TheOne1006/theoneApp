@@ -1,5 +1,15 @@
 <ion-view title="文章">
   <ion-content has-header="true">
-    <h1>内容</h1>
+    <div class="row article">
+      <div class="col col90">
+        <h4 class="title">标题</h4>
+        <div class="summary">
+          <div class="keyword">关键词</div>
+          <div class="addtime">时间</div>
+        </div>
+        <div class="article-content"  ng-bind-html="article.content">
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
