@@ -55,9 +55,18 @@ $ cd myApp
 |-app/js/app.js
 |-app/js/route.js  配置路由
 |-app/js/config.js 配置信息
+
 |-app/js/filters/
 |-app/js/services/
 |-app/js/directives/
 |-app/js/controllers/
 
 |-app/templates
+
+
+### 5. 跨域问题
+1. chrome 安装 `Allow-Control-Allow-Origin: *`插件,只有 serve的时候可见
+
+
+
+### 6. loing & 

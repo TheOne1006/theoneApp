@@ -1,28 +1,44 @@
-angular.module('theOneIo.controllers', [])
+'use strict';
+angular
+  .module('theOneIo.controllers', [])
+  .controller('ArticlesCtrl', ['$scope', function ($scope) {
 
-.controller('DashCtrl', function($scope) {})
+  }])
+  .controller('ArticleCtrl', ['$scope', function ($scope) {
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+  }])
+  .controller('IndexCtrl', ['$scope', 'indexServer', '$ionicLoading', function ($scope, indexServer, $ionicLoading) {
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
+    $scope.sections = [];
+    $scope.hasNextPage = true;
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
+    $scope.doRefresh = function () {
+      getIndexData().finally(function  () {
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    };
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});
+    // loding
+    $ionicLoading.show({
+        duration: 3000,
+        template: '<ion-spinner icon="lines" class="spinner-dark"></ion-spinner>'
+    });
+
+    (function init () {
+      getIndexData().finally(function  () {
+          $ionicLoading.hide();
+      });
+    })();
+
+    function getIndexData () {
+      return indexServer
+        .getHomeList()
+        .then(function (data) {
+          $scope.sections = data;
+        });
+    }
+
+
+
+  }])
+  ;

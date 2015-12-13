@@ -22,9 +22,26 @@ gulp.task('copy-templates', function () {
 
 // 复制js ??
 gulp.task('copy-js', function () {
-   return gulp.src(config.devDir+'js/*')
+
+   gulp.src([config.devDir+'js/*.js'])
         .pipe(rename({dirname: ''}))
         .pipe(gulp.dest(config.dest+'js/'));
+
+    gulp.src([config.devDir+'js/controllers/*.js'])
+         .pipe(rename({dirname: ''}))
+         .pipe(gulp.dest(config.dest+'js/controllers/'));
+
+    gulp.src([config.devDir+'js/directives/*.js'])
+         .pipe(rename({dirname: ''}))
+         .pipe(gulp.dest(config.dest+'js/directives/'));
+
+    gulp.src([config.devDir+'js/services/*.js'])
+         .pipe(rename({dirname: ''}))
+         .pipe(gulp.dest(config.dest+'js/services/'));
+
+    gulp.src([config.devDir+'js/filters/*.js'])
+         .pipe(rename({dirname: ''}))
+         .pipe(gulp.dest(config.dest+'js/filters/'));
 });
 
 // 复制字体

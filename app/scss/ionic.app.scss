@@ -21,5 +21,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "../lib/ionic/scss/ionic";
 
+
 // Include my self scss
-// @import "./my.scss";
+@import "./my.scss";

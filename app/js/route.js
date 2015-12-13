@@ -12,18 +12,35 @@ angular.module('theOneIo.route', ['ionic'])
   })
 
   // Each tab has its own nav history stack:
-
+  .state('main.index', {
+    url:'/index',
+    views:{
+      'mainContent' : {
+        templateUrl: 'templates/index.html',
+        controller: 'IndexCtrl'
+      }
+    }
+  })
   .state('main.articles', {
     url: '/articles/:tab',
     views: {
       'mainContent': {
-        templateUrl: 'templates/articles.html'
+        templateUrl: 'templates/articles.html',
+        controller: 'ArticlesCtrl'
       }
     }
-  });
-/*
-逐步开放
- */
+  })
+  .state('main.article',{
+    url: '/article/:id',
+    views: {
+      'mainContent': {
+        templateUrl: 'templates/article.html',
+        controller: 'ArticleCtrl'
+      }
+    }
+  })
+  ;
+
   // .state('tab.chats', {
   //     url: '/chats',
   //     views: {
@@ -52,10 +69,9 @@ angular.module('theOneIo.route', ['ionic'])
   //     }
   //   }
   // });
-*/
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/articles/all');
+  $urlRouterProvider.otherwise('/index');
 
 });
 

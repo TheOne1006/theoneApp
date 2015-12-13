@@ -1,8 +1,8 @@
-angular.module("theOneIo", [])
+angular.module("theOneIo.config", [])
 
 .constant("ENV", {
 	"debug": true,
-	"api": "localhost:3003/data"
+	"api": "http://www.theone.io"
 })
 
 ;

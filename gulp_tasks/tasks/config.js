@@ -9,14 +9,14 @@ var ngConstant = require('gulp-ng-constant');
 
 gulp.task('config-dev', function () {
   gulp.src('env_config/dev.json')
-    .pipe(ngConstant({name: 'theOneIo'}))
+    .pipe(ngConstant({name: 'theOneIo.config'}))
     .pipe(rename('config.js'))
     .pipe(gulp.dest(config.devDir+'js/'));
 });
 
 gulp.task('config-pro', function () {
   gulp.src('env_config/pro.json')
-    .pipe(ngConstant({name: 'theOneIo'}))
+    .pipe(ngConstant({name: 'theOneIo.config'}))
     .pipe(rename('config.js'))
     .pipe(gulp.dest(config.dest+'js/'));
 });

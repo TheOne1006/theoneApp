@@ -1,0 +1,49 @@
+/**
+ * 变量
+ */
+
+
+
+/**
+ * index.scss
+ */
+.bgimage {
+   color: #fff;
+   background-size: cover;
+   background-position: center center;
+ }
+
+.side-img-box {
+  height: 200px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+}
+
+
+/**
+ * global
+ */
+a {
+  text-decoration: none;
+}
+
+
+/**
+ * theme-light
+ */
+.theme-light a {
+  color: $light;
+}
+
+/**
+ * theme-day
+ */
+.theme-day {
+  a {
+    color: #000;
+  }
+
+  a:visited {
+    color: $dark;
+  }
+}

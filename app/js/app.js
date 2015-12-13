@@ -1,6 +1,12 @@
 'use strict';
 // Ionic theOne App
-angular.module('theOneIo', ['ionic', 'theOneIo.route', 'theOneIo.controllers', 'theOneIo.services'])
+angular.module('theOneIo', [
+  'ionic',
+  'theOneIo.config',
+  'theOneIo.route',
+  'theOneIo.controllers',
+  'theOneIo.services']
+  )
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -17,3 +23,10 @@ angular.module('theOneIo', ['ionic', 'theOneIo.route', 'theOneIo.controllers', '
   });
 })
 ;
+
+/**
+ * 模块依赖
+ */
+angular.module('theOneIo.services', ['ngResource','theOneIo.config']);
+angular.module('theOneIo.controllers',['theOneIo.services']);
+

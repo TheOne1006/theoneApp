@@ -10,6 +10,7 @@
 $ ionic start myApp tabs
 $ cd myApp
 $ ionic platform add ios
+
 $ ionic build ios
 $ ionic emulate ios
 ```
@@ -38,4 +39,10 @@ $ ionic emulate ios
 1. gulp
 
 2. karma
+
+## 特色
+
+1. 随机loading 效果
+2. 白天/夜间模式
+
 

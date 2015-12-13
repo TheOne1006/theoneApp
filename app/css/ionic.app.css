@@ -9088,3 +9088,40 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+/**
+ * 变量
+ */
+/**
+ * index.scss
+ */
+.bgimage {
+  color: #fff;
+  background-size: cover;
+  background-position: center center; }
+
+.side-img-box {
+  height: 200px;
+  overflow: hidden;
+  background-repeat: no-repeat; }
+
+/**
+ * global
+ */
+a {
+  text-decoration: none; }
+
+/**
+ * theme-light
+ */
+.theme-light a {
+  color: #fff; }
+
+/**
+ * theme-day
+ */
+.theme-day a {
+  color: #000; }
+
+.theme-day a:visited {
+  color: #444; }
