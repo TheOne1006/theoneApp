@@ -23,7 +23,7 @@ angular.module('theOneIo.route', ['ionic'])
     }
   })
   .state('main.articles', {
-    url: '/articles/:cate',
+    url: '/articles/:cateid',
     views: {
       'mainContent': {
         templateUrl: 'templates/articles.html',

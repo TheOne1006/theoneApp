@@ -15,7 +15,7 @@ angular
      * 当前 article
      */
     var article,
-      resource = $resource(env.api+'/h/article/id/:id',{id:'@id'});
+      resource = $resource(env.api+'/api/article/:id',{id:'@id'});
     return {
       getById: function (id) {
         if(article !== undefined && article._id === id) {

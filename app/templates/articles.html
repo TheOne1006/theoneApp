@@ -1,13 +1,16 @@
-<ion-view view-title="文章列表">
+<ion-view view-title="文章列表1">
   <ion-content has-header="true">
-    <ion-refresher ng-if="article.length > 0 " pulling-text="下拉刷新..." on-refresh="doRefresh()" refreshing-icon="ion-loading-c">
+    <ion-refresher ng-if="articles.length > 0 " pulling-text="下拉刷新..." on-refresh="doRefresh()" >
+    </ion-refresher>
     <ion-list>
-
       <ion-item ng-repeat="article in articles">
         <h2>
-          <a href="#/article/123">{{article.name}}</a>
+        123
+          <a href="#/article/123">{{article.title}}</a>
         </h2>
       </ion-item>
     </ion-list>
+    <ion-infinite-scroll on-infinite="loadMore()" distance="10%" ng-if="hasNextPage">
+
   </ion-content>
 </ion-view>

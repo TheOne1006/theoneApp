@@ -50,19 +50,19 @@ angular
   .controller('ArticlesCtrl', ['$scope', '$stateParams', '$ionicLoading', 'Articles', function ($scope, $stateParams, $ionicLoading, Articles) {
     $scope.articles = [];
 
-    $scope.currentCate = Articles.currentCate();
+    $scope.currentCateId = Articles.currentCateId();
 
     // 变换
-    if ($stateParams.cate !== Articles.currentCate()) {
-      $scope.currentCate = Articles.currentCate($stateParams.cate);
+    if ($stateParams.cate !== Articles.currentCateId()) {
+      $scope.currentCateId = Articles.currentCateId($stateParams.cateid);
       Articles.resetData();
     }
 
     $scope.doRefresh = function () {
 
       Articles.refresh().$promise.then(function (data) {
-        console.log('do refresh');
-        $scope.article = data;
+
+        $scope.articles = data;
 
         $scope.hasNextPage = true;
       })
@@ -76,6 +76,18 @@ angular
     $scope.doRefresh();
 
     $scope.loadMore = function () {
+
+      Articles
+        .pagination()
+        .$promise
+        .then(function (data) {
+          $scope.hasNextPage = false;
+          $scope.articles = $scope.articles.concat(data);
+
+        })
+        .finally(function () {
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        });
 
     };
 

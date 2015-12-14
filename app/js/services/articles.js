@@ -12,15 +12,15 @@ angular
   .factory('Articles', ['ENV', '$resource', function (env, $resource) {
 
     var articles = [],
-      currentCate = '',
+      currentCateId = '',
       nextPage = 1,
       hasNextPage = true,
-      resource = $resource(env.api+'/h/article/cate/:cate/:page',{page:1,limit:12},{
+      resource = $resource(env.api+'/api/articles/:cateId',{page:1,limit:10},{
         timeout: 20000
       });
 
     var getArticles = function (cate, page, cb) {
-      return resource.get({cate: currentCate,page:page}, function (data) {
+      return resource.query({cateId: currentCateId,page:page}, function (data) {
         console.log(data);
         cb(data);
       });
@@ -28,19 +28,19 @@ angular
 
 
     return {
-      currentCate: function (newCate) {
+      currentCateId: function (newCate) {
         if(typeof newCate !== 'undefined') {
-          currentCate = newCate;
+          currentCateId = newCate;
         }
-        return currentCate;
+        return currentCateId;
       },
       refresh: function () {
-        return getArticles(currentCate, 1, function (data) {
+        return getArticles(currentCateId, 1, function (data) {
           nextPage = 2;
           if(data.length < 12) {
             hasNextPage = false;
           }
-          articles = data.articleList;
+          articles = data;
         });
       },
       hasNextPage: function(has) {
@@ -50,12 +50,12 @@ angular
         return hasNextPage;
       },
       pagination: function() {
-        return getArticles(currentCate, nextPage, function(data) {
+        return getArticles(currentCateId, nextPage, function(data) {
           if (data.length < 12) {
             hasNextPage = false;
           }
           nextPage++;
-          articles = articles.concat(data.articleList);
+          articles = articles.concat(data);
         });
       },
       getArticles: function() {

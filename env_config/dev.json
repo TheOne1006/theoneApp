@@ -1,6 +1,6 @@
 {
   "ENV":{
     "debug":true,
-    "api":"http://www.theone.io"
+    "api":"http://localhost:3000"
   }
 }
