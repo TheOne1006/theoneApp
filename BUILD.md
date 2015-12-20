@@ -68,5 +68,3 @@ $ cd myApp
 1. chrome 安装 `Allow-Control-Allow-Origin: *`插件,只有 serve的时候可见
 
 
-
-### 6. loing & 

@@ -47,3 +47,6 @@ $ ionic emulate ios
 3. 收藏/搜索
 
 
+### 问题
+1. 后台解析 输出信息 如: `mermaid` 减少手机压力?
+2. google 代码格式化

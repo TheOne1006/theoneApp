@@ -28,14 +28,15 @@
     </ion-header-bar>
     <ion-content has-header="true">
       <ion-list>
-        <ion-item menu-close >
-          <a href="#/">首页</a>
+        <ion-item menu-close href='#/'>
+          <h2>
+            首页
+          </h2>
         </ion-item>
-        <ion-item menu-close ng-repeat="cate in sideCates">
-          <a ng-href="#/articles/{{cate._id}}">
+        <ion-item menu-close ng-repeat="cate in sideCates" ng-href="#/articles/{{cate._id}}">
+          <h2>
             {{cate.name}}
-          </a>
-
+          </h2>
         </ion-item>
       </ion-list>
     </ion-content>

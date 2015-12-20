@@ -4,31 +4,30 @@
     </ion-refresher>
 
     <ion-slide-box does-continue="true">
-      <ion-slide ng-repeat="item in [1,2,3]">
-        <div style="background-image: url(http://res.cloudinary.com/theone/image/upload/v1430750900/o0ohnh0hb1t8dlc7o0ln.jpg);" class="full-image bgimage side-img-box" >
+      <ion-slide ng-repeat="item in carousels">
+        <div style="background-image: url(http://res.cloudinary.com/theone/image/upload/w_600,h_200,c_thumb/{{item.imgInCloud.public_id}}.jpg);" class="full-image bgimage side-img-box" >
+
         </div>
       </ion-slide>
     </ion-slide-box>
 
     <ion-list >
+
       <div ng-repeat="item in sections">
 
-      <!-- <ion-item ng-repeat="item in sections"> -->
-        <ion-item class='item-borderless item-divider item-icon-left'>
-          <i class="icon ion-link"></i>
-          <h2 >
-            {{item.name}}
-          </h2>
+        <ion-item class='item-borderless item-divider text-center item-positive item-complex theone-item-divider'>
+          {{item.name}}
         </ion-item>
-        <ion-item ng-repeat="article in item.topArticles">
-          <h2>
-            <a href="#/article/{{article._id}}">
-              {{article.title}}
-            </a>
+        <ion-item class="item-thumbnail-right" ng-repeat="article in item.topArticles" href="#/article/{{article._id}}">
+          <img class='theone-item-thumbnail' ng-src="http://res.cloudinary.com/theone/image/upload/w_200,h_160,c_thumb/{{article.thumbnail}}.jpg">
+          <h2 ng-bind="article.title">
           </h2>
+          <p ng-bind="article.descript">
+          </p>
+
         </ion-item>
       </div>
-      <!-- </ion-item> -->
+
     </ion-list>
   </ion-content>
 </ion-view>

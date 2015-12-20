@@ -20,11 +20,52 @@
 }
 
 
+
 /**
  * global
  */
 a {
   text-decoration: none;
+}
+
+.item h2 {
+  margin: 0 0 2px 0;
+  font-size: 18px;
+}
+
+.theone-item-divider {
+  height: 38px;
+}
+
+/**
+ * 列表图片
+ */
+.item-thumbnail-right .item-content > img.theone-item-thumbnail {
+  max-width: 100px;
+}
+
+
+/**
+ * article
+ */
+.theone-article-header {
+  height: 200px;
+  width: 100%;
+  position: relative;
+}
+
+.theone-article-header h2,
+.theone-article-header h3,
+.theone-article-header h4,
+.theone-article-header h5 {
+  color: #fff;
+}
+
+.theone-article-header-word {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 1px;
 }
 
 
@@ -45,5 +86,10 @@ a {
 
   a:visited {
     color: $dark;
+  }
+
+  .item-thumbnail-right a:visited h2,
+  .item-thumbnail-right a:visited p {
+      color: $dark;
   }
 }

@@ -1,13 +1,14 @@
-<ion-view view-title="文章列表1">
+<ion-view view-title="文章列表">
   <ion-content has-header="true">
     <ion-refresher ng-if="articles.length > 0 " pulling-text="下拉刷新..." on-refresh="doRefresh()" >
     </ion-refresher>
     <ion-list>
-      <ion-item ng-repeat="article in articles">
-        <h2>
-        123
-          <a href="#/article/123">{{article.title}}</a>
+      <ion-item class="item-thumbnail-right" ng-repeat="article in articles" href="#/article/{{article._id}}">
+        <img class='theone-item-thumbnail' ng-src="http://res.cloudinary.com/theone/image/upload/w_200,h_160,c_thumb/{{article.thumbnail}}.jpg">
+        <h2 ng-bind="article.title">
         </h2>
+        <p ng-bind="article.descript">
+        </p>
       </ion-item>
     </ion-list>
     <ion-infinite-scroll on-infinite="loadMore()" distance="10%" ng-if="hasNextPage">
