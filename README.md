@@ -15,6 +15,16 @@ $ ionic build ios
 $ ionic emulate ios
 ```
 
+安装到真机
+
+```bash
+npm install -g ios-deploy (安装工具)
+```
+
+```shell
+ionic run ios --device
+```
+
 ## 目录结构
 
 ```
@@ -48,5 +58,3 @@ $ ionic emulate ios
 
 
 ### 问题
-1. 后台解析 输出信息 如: `mermaid` 减少手机压力?
-2. google 代码格式化
