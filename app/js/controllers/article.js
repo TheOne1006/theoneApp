@@ -15,6 +15,7 @@ angular
       var id = $stateParams.id;
 
       $scope.article = '';
+      $scope.title = '';
 
 
       // loding
@@ -30,7 +31,8 @@ angular
           $scope.article = data;
 
           $scope.article.thumbnailUrl = 'http://res.cloudinary.com/theone/image/upload/w_500,h_300,c_thumb/'+data.thumbnail+'.jpg';
-          console.log($scope.article.content);
+          // console.log($scope.article.content);
+          $scope.title = data.title;
 
         })
         .finally(function () {
