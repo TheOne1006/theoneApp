@@ -10,16 +10,25 @@
 angular
   .module('theOneIo.controllers')
 
-  .controller('ArticlesCtrl', ['$scope', '$stateParams', '$ionicLoading', 'Articles', function ($scope, $stateParams, $ionicLoading, Articles) {
+  .controller('ArticlesCtrl', ['$scope', '$stateParams', '$ionicLoading', '$log', 'Articles', 'catesServer', function ($scope, $stateParams, $ionicLoading, $log, Articles, catesServer) {
     $scope.articles = [];
 
     $scope.currentCateId = Articles.currentCateId();
 
+    // 获取cate 信息
+    $scope.currentCate = '';
+    $scope.currentCateName = catesServer.getCateNameById($stateParams.cateid);
+
     // 变换
     if ($stateParams.cate !== Articles.currentCateId()) {
       $scope.currentCateId = Articles.currentCateId($stateParams.cateid);
+      // 清除缓存
       Articles.resetData();
     }
+
+    $log.debug($stateParams.cateid);
+
+
 
 
     $scope.doRefresh = function (cb) {

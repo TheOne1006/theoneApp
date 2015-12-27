@@ -9,12 +9,13 @@
  */
 angular
   .module('theOneIo.controllers')
-  .controller('MainCtrl', ['$scope', 'indexServer', function ($scope, indexServer) {
+  .controller('MainCtrl', ['$scope', 'catesServer', function ($scope, catesServer) {
 
     $scope.sideCates = [];
 
-    indexServer
-      .getCateAll()
+    catesServer
+      .getCates()
+      .$promise
       .then(function (data) {
         $scope.sideCates = data;
       });

@@ -5,7 +5,11 @@ angular.module('theOneIo', [
   'theOneIo.config',
   'theOneIo.route',
   'theOneIo.controllers',
-  'theOneIo.services']
+  'theOneIo.services',
+  'theOneIo.directives',
+  'theOneIo.filters',
+  'angularMermaid'
+  ]
   )
 
 .run(function($ionicPlatform) {
@@ -29,4 +33,6 @@ angular.module('theOneIo', [
  */
 angular.module('theOneIo.services', ['ngResource','theOneIo.config']);
 angular.module('theOneIo.controllers',['theOneIo.services']);
+angular.module('theOneIo.directives',[]);
+angular.module('theOneIo.filters',[]);
 

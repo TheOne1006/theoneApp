@@ -10,11 +10,18 @@
 angular
   .module('theOneIo.controllers')
 
-  .controller('ArticleCtrl', ['$scope', '$stateParams','Article', function ($scope, $stateParams, Article) {
+  .controller('ArticleCtrl', ['$scope', '$stateParams', '$sce', '$compile', '$ionicLoading', '$log','Article', function ($scope, $stateParams , $sce, $compile, $ionicLoading, $log, Article) {
 
       var id = $stateParams.id;
 
       $scope.article = '';
+
+
+      // loding
+      $ionicLoading
+        .show({
+          template: '<ion-spinner icon="lines" class="spinner-dark"></ion-spinner>'
+        });
 
       Article
         .getById(id)
@@ -23,7 +30,11 @@ angular
           $scope.article = data;
 
           $scope.article.thumbnailUrl = 'http://res.cloudinary.com/theone/image/upload/w_500,h_300,c_thumb/'+data.thumbnail+'.jpg';
-          console.log(data);
+          console.log($scope.article.content);
+
+        })
+        .finally(function () {
+          $ionicLoading.hide();
         })
         ;
 

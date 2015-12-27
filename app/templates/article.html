@@ -1,4 +1,4 @@
-<ion-view title="文章">
+<ion-view title="{{article.title}}">
   <ion-content has-header="true">
     <div class="theone-article-header full-image bgimage" ng-style="{'background-image': 'url(' + article.thumbnailUrl + ')'}">
       <div class="theone-article-header-word padding-left padding-right">
@@ -10,7 +10,7 @@
     </div>
     <div class="row article">
       <div class="col col90 ">
-        <div class="article-content padding-top"  ng-bind-html="article.content">
+        <div class="article-content padding-top"  compile-html="article.content">
         </div>
       </div>
     </div>

@@ -24,3 +24,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include my self scss
 @import "./my.scss";
+
+// Include google prettify scss
+@import "./prettify.scss";
+
+
+// Include mermaid scss
+@import "./mermaid-theme-theone.scss";
