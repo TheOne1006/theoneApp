@@ -19,8 +19,10 @@ angular
     $scope.currentCate = '';
     $scope.currentCateName = catesServer.getCateNameById($stateParams.cateid);
 
+
     // 变换
-    if ($stateParams.cate !== Articles.currentCateId()) {
+    if ($stateParams.cateid !== $scope.currentCateId) {
+      $log.debug('change cateId');
       $scope.currentCateId = Articles.currentCateId($stateParams.cateid);
       // 清除缓存
       Articles.resetData();
@@ -33,12 +35,25 @@ angular
 
     $scope.doRefresh = function (cb) {
 
+      Articles.currentCateId($stateParams.cateid);
+
+      var nowCurrentCateId = $scope.currentCateId;
+
       Articles
         .refresh()
         .$promise
         .then(function (data) {
-          $scope.articles = data;
-          $scope.hasNextPage = true;
+
+          if(nowCurrentCateId === $scope.currentCateId) {
+
+            $scope.articles = data;
+            $scope.hasNextPage = true;
+
+            if(data.length < 10) {
+              $scope.hasNextPage = false;
+            }
+          }
+
         })
         .finally(function () {
           $scope.$broadcast('scroll.refreshComplete');
@@ -52,13 +67,19 @@ angular
     };
 
     $scope.loadMore = function () {
+      var nowCurrentCateId = $scope.currentCateId;
 
       Articles
         .pagination()
         .$promise
         .then(function (data) {
-          $scope.hasNextPage = false;
-          $scope.articles = $scope.articles.concat(data);
+
+          if(nowCurrentCateId === $scope.currentCateId) {
+            if(data.length < 10) {
+              $scope.hasNextPage = false;
+            }
+            $scope.articles = $scope.articles.concat(data);
+          }
 
         })
         .finally(function () {

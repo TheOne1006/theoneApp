@@ -35,12 +35,19 @@ angular
         return currentCateId;
       },
       refresh: function () {
+
+        var nowCurrentCateId = currentCateId;
+
         return getArticles(currentCateId, 1, function (data) {
-          nextPage = 2;
-          if(data.length < 12) {
-            hasNextPage = false;
+
+          // 延迟导致信息错误
+          if(nowCurrentCateId === currentCateId) {
+              nextPage = 2;
+              if(data.length < 12) {
+                hasNextPage = false;
+              }
+              articles = data;
           }
-          articles = data;
         });
       },
       hasNextPage: function(has) {
@@ -50,12 +57,19 @@ angular
         return hasNextPage;
       },
       pagination: function() {
+        var nowCurrentCateId = currentCateId;
+
         return getArticles(currentCateId, nextPage, function(data) {
-          if (data.length < 12) {
-            hasNextPage = false;
+
+          // 延迟导致信息错误
+          if(nowCurrentCateId === currentCateId) {
+
+            if (data.length < 12) {
+              hasNextPage = false;
+            }
+            nextPage++;
+            articles = articles.concat(data);
           }
-          nextPage++;
-          articles = articles.concat(data);
         });
       },
       getArticles: function() {
