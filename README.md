@@ -4,7 +4,17 @@
 
 ## 安装
 
+### ios 真机测试准备
+1. 确保系统安装xcode
+2. 安装全局 ios-sim
+3. xcode 支持ios版本,是否含有目标测试机的版本
+
 使用 ionic 安装步骤
+
+全局环境  
+ionic v1.1.1
+cordova v5.4.0
+
 
 ```bash
 $ ionic start myApp tabs
@@ -33,7 +43,7 @@ ionic run ios --device
 |- platforms          (ionic初始化)
 |- plugins            (ionic初始化)
 |- resources          (ionic初始化 系统资源图片)
-|- scss 
+|- scss
 |- www                (ionic 初始化,主要编写目录)
 
 |- app/               (用于gulp 工作生成, www 作为dest目录)
